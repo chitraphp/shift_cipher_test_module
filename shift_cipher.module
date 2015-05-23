@@ -9,8 +9,8 @@ function shift_cipher_menu() {
         'type' => MENU_NORMAL_ITEM,
     );
         $items['shift_cipher_success'] = array(
-        'title' => 'Triangle Tracker',
-        'page callback' => 'triangle_tracker_success',
+        'title' => 'Encrypted Phrase',
+        'page callback' => 'shift_cipher_success',
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
