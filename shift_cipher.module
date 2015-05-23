@@ -50,7 +50,7 @@ function shift_cipher_form_submit($form,&$form_state) {
   $shift_value = $form_state['values']['shift_value'];
   $shift_dir = $form_state['values']['shift_dir'];
   $phrase = $form_state['values']['phrase'];
-  $phrase_chars = count_chars($input,3);
+  $phrase_chars = count_chars($phrase,3);// a string with all the different characters used
   $chars_array = array();
   $encr_array = array();
   $output = "string";
