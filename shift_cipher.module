@@ -85,5 +85,5 @@ function shift_cipher_form_submit($form,&$form_state) {
 
 function shift_cipher_success() {
 
-    return "<p>".$_SESSION['encr_str']."</p>";
+    return "<h3>".$_SESSION['encr_str']."</h3>";
 }
