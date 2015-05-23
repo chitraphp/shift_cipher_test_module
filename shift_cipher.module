@@ -1,0 +1,89 @@
+<?php
+function shift_cipher_menu() {
+    $items = array();
+    $items['shift_cipher'] = array(
+        'title' => 'Shift Cipher',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('shift_cipher_form'),
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+        $items['shift_cipher_success'] = array(
+        'title' => 'Triangle Tracker',
+        'page callback' => 'triangle_tracker_success',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    return $items;
+}
+
+function shift_cipher_form() {
+    $form['shift_value'] = array(
+        '#title' => 'Shift Value',
+        '#type' => 'textfield',
+        '#description' => t('Please enter the number.'),
+        '#element_validate' => array('element_validate_integer_positive'),
+        '#required' => TRUE,
+    );
+    $form['shift_dir'] = array(
+        '#title' => 'Shift Direction',
+        '#type' => 'textfield',
+        '#description' => t('Please enter the direction left or right.'),
+        '#required' => TRUE,
+    );
+    $form['phrase'] = array(
+        '#title' => 'Phrase',
+        '#type' => 'textfield',
+        '#description' => t('Please enter the phrase you want to encrypt.'),
+        '#required' => TRUE,
+    );
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Encrypt',
+    );
+
+    return $form;
+}
+
+function shift_cipher_form_submit($form,&$form_state) {
+
+  $shift_value = $form_state['values']['shift_value'];
+  $shift_dir = $form_state['values']['shift_dir'];
+  $phrase = $form_state['values']['phrase'];
+  $phrase_chars = count_chars($input,3);
+  $chars_array = array();
+  $encr_array = array();
+  $output = "string";
+
+  for($i=0;$i<strlen($phrase_chars);$i++){
+    //echo $letters[$i]."<br>";
+    if (preg_match('/[a-z,A-Z]/', $phrase_chars[$i])) {
+      $str = $phrase_chars[$i];
+      array_push($chars_array,$str);//holds only letters in phrase
+      //echo $str."<br>";
+      for($x=1;$x<=$shift_value;$x++){
+
+        if($shift_dir === "left"){
+          $str = ('a' === $str ? 'z' : chr(ord($str)-1));
+          }
+          else {
+            $str = ('z' === $str ? 'a' : chr(ord($str)+1));
+          }
+          //echo $str."<br>";
+      }
+      array_push($encr_array,$str);
+    }
+ }
+ $chars_array = implode($chars_array);//to make a string of array values of chars of input phrase
+ $encr_array = implode($encr_array); //to make a string of encrypted values
+ $output = strtr($phrase,$chars_array,$encr_array);
+
+ $_SESSION['encr_str'] = $output;
+
+ $form_state['redirect'] = 'triangle_success';
+}
+
+function shift_cipher_success() {
+
+    return $_SESSION['encr_str'];
+}
