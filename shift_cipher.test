@@ -9,7 +9,7 @@ class ShiftCipherUnitTests extends DrupalUnitTestCase {
         );
     }
     //single letter,left
-    function testshiftCipher_singleLetter() {
+    function testshiftCipherSingleLetter() {
         $input = "a";
         $dir = "left";
         $value = 1;

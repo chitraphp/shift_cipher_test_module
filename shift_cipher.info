@@ -4,3 +4,4 @@ package = Epicodus Examples
 core = 7.x
 files[] = shift_cipher.module
 files[] = shift_cipher.test
+dependencies[] = simpletest
