@@ -29,7 +29,7 @@ function shift_cipher($phrase, $shift_dir, $shift_value) {
  $encr_array = implode($encr_array); //to make a string of encrypted values
  $output = strtr($phrase,$chars_array,$encr_array);
 
- return $output
+ return $output;
 
 }
 
