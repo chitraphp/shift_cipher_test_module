@@ -1,0 +1,20 @@
+<?php
+class ShiftCipherUnitTests extends DrupalUnitTestCase {
+    public static function getInfo() {
+        // Note: getInfo() strings should not be translated.
+        return array(
+            'name' => 'Shift_Cipher unit tests',
+            'description' => 'Test that shift_cipher_module works properly.',
+            'group' => 'Cool Stuff',
+        );
+    }
+    //single letter,left
+    function testshiftCipher_singleLetter() {
+        $input = "a";
+        $dir = "left";
+        $value = 1;
+        $result = shift_cipher($input,$dir,$value);
+        $this->assertEqual($result, "A");
+    }
+
+  }
